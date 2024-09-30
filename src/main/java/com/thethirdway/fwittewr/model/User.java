@@ -12,18 +12,23 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column(nullable = false)
+	private long id;
+	
+	@Column(nullable = false, unique = true)
 	private String name;
+	@Column(nullable = false, unique = true)
+	private String password;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Post> publishedPosts;
@@ -35,5 +40,4 @@ public class User {
 	private List<Post> likedPosts;
 	
 	private Role role;
-	private boolean deactivated;
 }
