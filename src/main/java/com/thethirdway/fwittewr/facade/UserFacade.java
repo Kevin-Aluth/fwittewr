@@ -22,11 +22,14 @@ public class UserFacade {
 		userService.saveUser(u);
 	}
 	
-	public UserDTO login(LoginDTO loginDTO) {
+	public User login(LoginDTO loginDTO) {
 		User u = userService.getUserByNameAndPassword(loginDTO.getName(), loginDTO.getPassword());
 		
-		UserDTO uDTO = userMapper.toUserDTO(u);
-		
-		return uDTO;	
+		return u;	
+	}
+	
+	public UserDTO getById(long id) {
+		User u = userService.getUserById(id); 
+		return userMapper.toUserDTO(u); 
 	}
 }

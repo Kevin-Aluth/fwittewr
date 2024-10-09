@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.thethirdway.fwittewr.dto.request.CreateUserDTO;
+import com.thethirdway.fwittewr.model.Post;
 import com.thethirdway.fwittewr.model.User;
 import com.thethirdway.fwittewr.repo.UserRepository;
 import com.thethirdway.fwittewr.service.UserService;
@@ -29,6 +30,23 @@ public class UserServiceJPA implements UserService {
 	@Override
 	public User getUserByNameAndPassword(String name, String password) {
 		return repo.findByNameAndPassword(name, password)
-				.orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "username or password incorrect"));
+				.orElseThrow(()->new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "username or password incorrect"));
+	}
+
+	@Override
+	public User getUserById(long id) {
+		return repo.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "user id not found"));
+	}
+
+	@Override
+	public User getUserByName(String name) {
+		return repo.findByName(name).orElseThrow(()->new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "user id not found"));
+	}
+
+	@Override
+	public void likePost(long id, Post p) {
+		User u = getUserById(id); 
+		u.getLikedPosts().add(p); 
+		repo.save(u); 
 	}
 }

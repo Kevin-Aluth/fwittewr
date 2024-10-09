@@ -1,0 +1,1 @@
+INSERT INTO MY_USER("NAME", "EMAIL", "PASSWORD", "ROLE") VALUES('dababy', 'asdf@gmail.com', 'root', 2);

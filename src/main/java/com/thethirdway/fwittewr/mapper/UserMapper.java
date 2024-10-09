@@ -26,6 +26,7 @@ public class UserMapper {
 		
 		u.setName(uDTO.getName());
 		u.setPassword(uDTO.getPassword());
+		u.setEmail(uDTO.getEmail());
 		u.setRole(Role.USER);
 		u.setPublishedPosts(new ArrayList<>());
 		u.setLikedPosts(new ArrayList<>());
